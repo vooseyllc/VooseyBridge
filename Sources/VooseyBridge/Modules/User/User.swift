@@ -9,13 +9,12 @@ import Foundation
 
 public struct User: Codable, Hashable {
 	public struct RegistrationData: Codable {
-		public init(username: String, email: String, firstName: String, lastName: String, password: String, profilePicURL: String?) {
+		public init(username: String, email: String, firstName: String, lastName: String, password: String) {
 			self.username = username
 			self.email = email
 			self.firstName = firstName
 			self.lastName = lastName
 			self.password = password
-			self.profilePicURL = profilePicURL
 		}
 		
 		public var username: String
@@ -23,7 +22,6 @@ public struct User: Codable, Hashable {
 		public var firstName: String
 		public var lastName: String
 		public var password: String
-		public var profilePicURL: String?
 		
 		
 		
@@ -33,7 +31,6 @@ public struct User: Codable, Hashable {
 			self.firstName = ""
 			self.lastName = ""
 			self.password = ""
-			self.profilePicURL = ""
 		}
 	}
 	
@@ -71,12 +68,14 @@ public struct User: Codable, Hashable {
 	}
 	
 	public struct Personal: Codable, Identifiable, Hashable {
-		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil) {
+		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, totalBytesUsed: Int? = nil) {
 			self.micro = micro
 			self.email = email
 			self.token = token
 			self.businessTeams = businessTeams
+			self.totalBytesUsed = totalBytesUsed
 		}
+		
 		
 		public var id: UUID {
 			micro.id
@@ -85,6 +84,7 @@ public struct User: Codable, Hashable {
 		public var email: String?
 		public var token: String?
 		public var businessTeams: [BusinessTeamMember.Personal]?
+		public var totalBytesUsed: Int?
 	}
 	
 	public struct CreateData: Codable {

@@ -9,14 +9,16 @@ import Foundation
 
 public struct Showcase {
 	public struct Global: Codable, Identifiable, Hashable {
-		public init(micro: Showcase.Micro, business: Business.Micro) {
+		public init(micro: Showcase.Micro, business: Business.Micro, tour: [TourItem]) {
 			self.micro = micro
 			self.business = business
+			self.tour = tour
 		}
 		
 		public var id: UUID? {
 			micro.id
 		}
+		public var tour: [TourItem]
 		public var micro: Micro
 		public var business: Business.Micro
 	}
@@ -44,7 +46,6 @@ public struct Showcase {
 			self.pdfURL = pdfURL
 		}
 		
-		
 		public var id: UUID?
 		public var title: String
 		public var description: String?
@@ -71,12 +72,14 @@ public struct Showcase {
 			micro.id
 		}
 		
-		public init(micro: Showcase.Micro, businessID: UUID) {
+		public init(micro: Showcase.Micro, businessID: UUID, tour: [TourItem]) {
 			self.micro = micro
 			self.businessID = businessID
+			self.tour = tour
 		}
 		
 		public var micro: Micro
 		public var businessID: UUID
+		public var tour: [TourItem]
 	}
 }

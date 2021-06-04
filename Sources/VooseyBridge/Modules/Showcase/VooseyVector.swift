@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreGraphics
 
 public struct VooseyVector3: Codable, Hashable {
 	public var x: CGFloat

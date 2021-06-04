@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreGraphics
 
 public struct Asset {
 	public struct Skybox: Codable {

@@ -17,6 +17,10 @@ public struct VooseyVector3: Codable, Hashable {
 		self.y = y
 		self.z = z
 	}
+	
+	public static var zero: VooseyVector3 {
+		VooseyVector3(x: 0, y: 0, z: 0)
+	}
 }
 
 public struct VooseyVector4: Codable, Hashable {
@@ -30,5 +34,9 @@ public struct VooseyVector4: Codable, Hashable {
 		self.y = y
 		self.z = z
 		self.w = w
+	}
+	
+	public static var zero: VooseyVector4 {
+		VooseyVector4(x: 0, y: 0, z: 0, w: 0)
 	}
 }

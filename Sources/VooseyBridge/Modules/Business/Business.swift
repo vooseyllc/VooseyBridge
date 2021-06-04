@@ -48,15 +48,16 @@ public struct Business {
 	}
 	
 	public struct Personal: Codable, Identifiable, Hashable {
-		public init(micro: Business.Micro, team: [BusinessTeamMember.Personal], showcases: [Showcase.Global]) {
+		public init(micro: Business.Micro, team: [BusinessTeamMember.Personal], showcases: [Showcase.Global]? = nil, totalBytesUsed: Int? = nil) {
 			self.micro = micro
 			self.team = team
 			self.showcases = showcases
+			self.totalBytesUsed = totalBytesUsed
 		}
 		
 		
 		public static func == (lhs: Business.Personal, rhs: Business.Personal) -> Bool {
-			return lhs.micro == rhs.micro
+			return lhs.micro == rhs.micro && lhs.totalBytesUsed == rhs.totalBytesUsed
 		}
 		public var id: UUID? {
 			micro.id
@@ -64,6 +65,7 @@ public struct Business {
 		public var micro: Micro
 		public var team: [BusinessTeamMember.Personal]
 		public var showcases: [Showcase.Global]?
+		public var totalBytesUsed: Int?
 		
 		public var global: Business.Global {
 			return  Business.Global(micro: self.micro, team: self.team.map({ $0.global }), showcases: self.showcases ?? [])

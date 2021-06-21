@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Media {
-	public struct Global: Codable {
+	public struct Global: Codable, Identifiable, Hashable {
 		public init(id: UUID, filename: String, mediaURL: String, totalBytes: Int? = nil, mediaType: MediaType) {
 			self.id = id
 			self.filename = filename
@@ -35,16 +35,18 @@ public struct Media {
 	}
 	
 	public struct UploadData: Codable {
-		public init(filename: String, totalBytes: Int? = nil, businessID: UUID? = nil, mediaType: MediaType) {
+		public init(filename: String, totalBytes: Int? = nil, businessID: UUID? = nil, projectID: UUID? = nil, mediaType: MediaType) {
 			self.filename = filename
 			self.totalBytes = totalBytes
 			self.businessID = businessID
+			self.projectID = projectID
 			self.mediaType = mediaType
 		}
 		
 		public var filename: String
 		public var totalBytes: Int?
 		public var businessID: UUID?
+		public var projectID: UUID?
 		public var mediaType: MediaType
 	}
 }

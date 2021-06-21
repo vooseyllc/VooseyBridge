@@ -67,7 +67,7 @@ public struct Showcase {
 		public var pdfURL: String?
 	}
 	
-	public struct UploadData: Codable, Identifiable, Hashable {
+	public struct CreateData: Codable, Identifiable, Hashable {
 		public var id: UUID? {
 			micro.id
 		}

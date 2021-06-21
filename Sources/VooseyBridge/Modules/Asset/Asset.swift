@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if os(iOS)
+import CoreGraphics
+#endif
 
 public struct Asset {
 	public struct Skybox: Codable {

@@ -72,7 +72,7 @@ public struct Business {
 		}
 	}
 	
-	public struct CreateBusinessData: Codable {
+	public struct CreateData: Codable {
 		public init(displayName: String, websiteURL: String? = nil, profilePicURL: String? = nil, description: String? = nil, legalName: String? = nil, address: String? = nil, coordinates: String? = nil) {
 			self.displayName = displayName
 			self.websiteURL = websiteURL

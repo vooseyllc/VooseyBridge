@@ -12,6 +12,7 @@ let package = Package(
             targets: ["VooseyBridge"]),
     ],
     dependencies: [
+		.package(url: "https://github.com/JustinMeans/JWSNewsBridge", from: "1.0.1"),
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -20,7 +21,9 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "VooseyBridge",
-            dependencies: []),
+            dependencies: [
+				.product(name: "JWSNewsBridge", package: "JWSNewsBridge"),
+			]),
         .testTarget(
             name: "VooseyBridgeTests",
             dependencies: ["VooseyBridge"]),

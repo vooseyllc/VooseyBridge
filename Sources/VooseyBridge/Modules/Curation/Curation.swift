@@ -10,7 +10,7 @@ import JWSNewsBridge
 
 public struct Curation {
 	public struct Global: Codable, Hashable {
-		public init(dailyShowcase: Showcase.Micro? = nil, news: [News.Global]? = nil, showcases: [Showcase.Micro]? = nil, businesses: [Business.Micro]? = nil) {
+		public init(dailyShowcase: Showcase.Global? = nil, news: [News.Global]? = nil, showcases: [Showcase.Global]? = nil, businesses: [Business.Micro]? = nil) {
 			self.dailyShowcase = dailyShowcase
 			self.news = news
 			self.showcases = showcases
@@ -18,9 +18,9 @@ public struct Curation {
 		}
 		
 		
-		public var dailyShowcase: Showcase.Micro?
+		public var dailyShowcase: Showcase.Global?
 		public var news: [News.Global]?
-		public var showcases: [Showcase.Micro]?
+		public var showcases: [Showcase.Global]?
 		public var businesses: [Business.Micro]?
 	}
 }

@@ -65,6 +65,7 @@ public struct Business {
 		public var micro: Micro
 		public var team: [BusinessTeamMember.Personal]
 		public var showcases: [Showcase.Global]?
+//		public var clients: [Client]
 		public var totalBytesUsed: Int?
 		
 		public var global: Business.Global {

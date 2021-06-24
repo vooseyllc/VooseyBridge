@@ -27,7 +27,7 @@ public struct Project {
 	}
 	
 	public struct Micro: Codable, Identifiable, Hashable {
-		public init(id: UUID? = nil, business: Business.Micro, title: String, createdDate: Date, lastUpdated: Date? = nil, coordinates: String? = nil, previewImageURL: String? = nil) {
+		public init(id: UUID? = nil, business: Business.Micro, title: String, createdDate: Date? = nil, lastUpdated: Date? = nil, coordinates: String? = nil, previewImageURL: String? = nil) {
 			self.id = id
 			self.business = business
 			self.title = title
@@ -40,7 +40,7 @@ public struct Project {
 		public var id: UUID?
 		public var business: Business.Micro
 		public var title: String
-		public var createdDate: Date
+		public var createdDate: Date?
 		public var lastUpdated: Date?
 		public var coordinates: String?
 		public var previewImageURL: String?

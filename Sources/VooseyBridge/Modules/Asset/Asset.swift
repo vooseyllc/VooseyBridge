@@ -12,20 +12,21 @@ import CoreGraphics
 
 public struct Asset {
 	public struct Skybox: Codable {
-		public init(backgroundImageURL: String, lightingEnvironmentImageURL: String, previewImage: String, lightingEnvironmentIntensity: CGFloat, sunIntensity: CGFloat) {
+		public init(backgroundImageURL: String, lightingEnvironmentImageURL: String, previewImage: String, lightingEnvironmentIntensity: CGFloat, sunIntensity: CGFloat, title: String) {
 			self.backgroundImageURL = backgroundImageURL
 			self.lightingEnvironmentImageURL = lightingEnvironmentImageURL
 			self.previewImage = previewImage
 			self.lightingEnvironmentIntensity = lightingEnvironmentIntensity
 			self.sunIntensity = sunIntensity
+			self.title = title
 		}
 		
-		
-//		public var id: UUID
 		public var backgroundImageURL: String
 		public var lightingEnvironmentImageURL: String
 		public var previewImage: String
 		public var lightingEnvironmentIntensity: CGFloat
 		public var sunIntensity: CGFloat
+		public var title: String
+		
 	}
 }

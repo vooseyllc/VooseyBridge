@@ -48,7 +48,7 @@ public struct User: Codable, Hashable {
 	}
 	
 	public struct Micro: Codable, Identifiable, Hashable {
-		public init(id: UUID, username: String, profilePicURL: String? = nil, firstName: String? = nil, lastName: String? = nil, websiteURL: String? = nil, createdDate: Date? = nil) {
+		public init(id: UUID, username: String, profilePicURL: URL? = nil, firstName: String? = nil, lastName: String? = nil, websiteURL: URL? = nil, createdDate: Date? = nil) {
 			self.id = id
 			self.username = username
 			self.profilePicURL = profilePicURL
@@ -60,10 +60,10 @@ public struct User: Codable, Hashable {
 		
 		public var id: UUID
 		public var username: String
-		public var profilePicURL: String?
+		public var profilePicURL: URL?
 		public var firstName: String?
 		public var lastName: String?
-		public var websiteURL: String?
+		public var websiteURL: URL?
 		public var createdDate: Date?
 	}
 	

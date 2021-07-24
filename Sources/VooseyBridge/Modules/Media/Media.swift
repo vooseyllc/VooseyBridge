@@ -9,7 +9,7 @@ import Foundation
 
 public struct Media {
 	public struct Global: Codable, Identifiable, Hashable {
-		public init(id: UUID, filename: String, mediaURL: String, totalBytes: Int? = nil, mediaType: MediaType) {
+		public init(id: UUID, filename: String, mediaURL: URL, totalBytes: Int? = nil, mediaType: MediaType) {
 			self.id = id
 			self.filename = filename
 			self.mediaURL = mediaURL
@@ -19,18 +19,18 @@ public struct Media {
 		
 		public var id: UUID
 		public var filename: String
-		public var mediaURL: String
+		public var mediaURL: URL
 		public var totalBytes: Int?
 		public var mediaType: MediaType
 	}
 	
 	public struct Personal: Codable {
-		public init(putUploadRequestURL: String? = nil, global: Media.Global) {
+		public init(putUploadRequestURL: URL? = nil, global: Media.Global) {
 			self.putUploadRequestURL = putUploadRequestURL
 			self.global = global
 		}
 		
-		public var putUploadRequestURL: String?
+		public var putUploadRequestURL: URL?
 		public var global: Global
 	}
 	

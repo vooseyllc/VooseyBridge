@@ -24,7 +24,7 @@ public struct Showcase {
 	}
 	
 	public struct Micro: Codable, Identifiable, Hashable {
-		public init(id: UUID? = nil, title: String, description: String? = nil, websiteURL: String? = nil, coordinates: String? = nil, imageURLs: [String], business: Business.Micro, sqft: Double? = nil, beds: Int? = nil, baths: Double? = nil, floors: Double? = nil, garages: Int? = nil, length: Double, depth: Double, height: Double, tags: [String]? = nil, published: Bool, modelURL: String, pdfURL: String? = nil) {
+		public init(id: UUID? = nil, title: String, description: String? = nil, websiteURL: String? = nil, coordinates: String? = nil, imageURLs: [String], business: Business.Micro, sqft: Double? = nil, beds: Int? = nil, baths: Double? = nil, floors: Double? = nil, garages: Int? = nil, length: Double, depth: Double, height: Double, tags: [String]? = nil, published: Bool, modelURL: String, pdfURL: String? = nil, featuredImageURL: String? = nil) {
 			self.id = id
 			self.title = title
 			self.description = description
@@ -44,6 +44,7 @@ public struct Showcase {
 			self.published = published
 			self.modelURL = modelURL
 			self.pdfURL = pdfURL
+			self.featuredImageURL = featuredImageURL
 		}
 		
 		public var id: UUID?
@@ -65,6 +66,7 @@ public struct Showcase {
 		public var published: Bool
 		public var modelURL: String
 		public var pdfURL: String?
+		public var featuredImageURL: String?
 	}
 	
 	public struct CreateData: Codable, Identifiable, Hashable {

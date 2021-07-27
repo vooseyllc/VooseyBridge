@@ -1,3 +1,3 @@
 struct VooseyBridge {
-    var text = "Hello, World!"
+    var text = "Voosey Bridge"
 }

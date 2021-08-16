@@ -29,4 +29,8 @@ public struct Asset {
 		public var title: String
 		
 	}
+	
+//	public struct Material: Codable {
+//		public init(imageURL: String, )
+//	}
 }

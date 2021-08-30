@@ -24,7 +24,7 @@ public struct Showcase {
 	}
 	
 	public struct Micro: Codable, Identifiable, Hashable {
-		public init(id: UUID? = nil, title: String, description: String? = nil, websiteURL: String? = nil, coordinates: String? = nil, imageURLs: [String], business: Business.Micro, sqft: Double? = nil, beds: Int? = nil, baths: Double? = nil, floors: Double? = nil, garages: Int? = nil, length: Double, depth: Double, height: Double, tags: [String]? = nil, published: Bool, modelURL: String, pdfURL: String? = nil, featuredImageURL: String? = nil) {
+		public init(id: UUID? = nil, title: String, description: String? = nil, websiteURL: String? = nil, coordinates: String? = nil, imageURLs: [String], business: Business.Micro, sqft: Double? = nil, beds: Int? = nil, baths: Double? = nil, floors: Double? = nil, garages: Int? = nil, length: Double, depth: Double, height: Double, tags: [String]? = nil, published: Bool, modelURL: String, pdfURL: String? = nil, featuredImageURL: String? = nil, createdDate: Date, editedDate: Date? = nil) {
 			self.id = id
 			self.title = title
 			self.description = description
@@ -45,6 +45,8 @@ public struct Showcase {
 			self.modelURL = modelURL
 			self.pdfURL = pdfURL
 			self.featuredImageURL = featuredImageURL
+			self.createdDate = createdDate
+			self.editedDate = editedDate
 		}
 		
 		public var id: UUID?
@@ -67,6 +69,8 @@ public struct Showcase {
 		public var modelURL: String
 		public var pdfURL: String?
 		public var featuredImageURL: String?
+		public var createdDate: Date
+		public var editedDate: Date?
 	}
 	
 	public struct CreateData: Codable, Identifiable, Hashable {

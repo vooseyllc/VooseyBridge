@@ -68,14 +68,16 @@ public struct User: Codable, Hashable {
 	}
 	
 	public struct Personal: Codable, Identifiable, Hashable {
-		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil) {
+		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, favoriteShowcases: [Showcase.Micro]? = nil) {
 			self.micro = micro
 			self.email = email
 			self.token = token
 			self.businessTeams = businessTeams
 			self.projects = projects
 			self.totalBytesUsed = totalBytesUsed
+			self.favoriteShowcases = favoriteShowcases
 		}
+		
 		
 		public var id: UUID {
 			micro.id
@@ -86,6 +88,7 @@ public struct User: Codable, Hashable {
 		public var businessTeams: [BusinessTeamMember.Personal]?
 		public var projects: [Project.Global]?
 		public var totalBytesUsed: Int?
+		public var favoriteShowcases: [Showcase.Micro]?
 	}
 	
 	public struct CreateData: Codable {

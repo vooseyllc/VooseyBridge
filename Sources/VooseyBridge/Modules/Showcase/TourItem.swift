@@ -14,8 +14,8 @@ import UIKit
 #endif
 
 public struct TourItem: Codable, Hashable {
-	#if os(macOS)
-	public init(id: UUID? = nil, showcase: Showcase.Micro?, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Double, title: String, description: String?, imageURL: String?, localImage: NSImage?) {
+	#if !os(Linux)
+	public init(id: UUID? = nil, showcase: Showcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Double, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil, localImage: NSUIImage? = nil) {
 		self.id = id
 		self.showcase = showcase
 		self.camPosition = camPosition
@@ -24,11 +24,23 @@ public struct TourItem: Codable, Hashable {
 		self.title = title
 		self.description = description
 		self.imageURL = imageURL
+		self.exposureOffset = exposureOffset
+		self.enableDepthOfField = enableDepthOfField
+		self.aperture = aperture
+		self.focusDistance = focusDistance
+		self.duration = duration
+		self.sunAzimuth = sunAzimuth
+		self.sunAltitude = sunAltitude
+		self.sunIntensity = sunIntensity
+		self.lightingEnvironmentIntensity = lightingEnvironmentIntensity
+		self.shadowRadius = shadowRadius
+		self.shadowOpacity = shadowOpacity
+		self.skyboxBackgroundImageURL = skyboxBackgroundImageURL
+		self.skyboxLightingEnvironmentImageURL = skyboxLightingEnvironmentImageURL
 		self.localImage = localImage
 	}
 	#endif
-	#if os(iOS)
-	public init(id: UUID? = nil, showcase: Showcase.Micro?, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Double, title: String, description: String?, imageURL: String?, localImage: UIImage?) {
+	public init(id: UUID? = nil, showcase: Showcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Double, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil) {
 		self.id = id
 		self.showcase = showcase
 		self.camPosition = camPosition
@@ -37,18 +49,19 @@ public struct TourItem: Codable, Hashable {
 		self.title = title
 		self.description = description
 		self.imageURL = imageURL
-		self.localImage = localImage
-	}
-	#endif
-	public init(id: UUID? = nil, showcase: Showcase.Micro?, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Double, title: String, description: String?, imageURL: String?) {
-		self.id = id
-		self.showcase = showcase
-		self.camPosition = camPosition
-		self.camOrientation = camOrientation
-		self.camPov = camPov
-		self.title = title
-		self.description = description
-		self.imageURL = imageURL
+		self.exposureOffset = exposureOffset
+		self.enableDepthOfField = enableDepthOfField
+		self.aperture = aperture
+		self.focusDistance = focusDistance
+		self.duration = duration
+		self.sunAzimuth = sunAzimuth
+		self.sunAltitude = sunAltitude
+		self.sunIntensity = sunIntensity
+		self.lightingEnvironmentIntensity = lightingEnvironmentIntensity
+		self.shadowRadius = shadowRadius
+		self.shadowOpacity = shadowOpacity
+		self.skyboxBackgroundImageURL = skyboxBackgroundImageURL
+		self.skyboxLightingEnvironmentImageURL = skyboxLightingEnvironmentImageURL
 	}
 	
 	public var id: UUID?
@@ -59,8 +72,22 @@ public struct TourItem: Codable, Hashable {
 	public var title: String
 	public var description: String?
 	public var imageURL: String?
+	public var exposureOffset: Float?
+	public var enableDepthOfField: Bool?
+	public var aperture: Float?
+	public var focusDistance: Float?
+	public var duration: Float?
+	public var sunAzimuth: Float?
+	public var sunAltitude: Float?
+	public var sunIntensity: Float?
+	public var lightingEnvironmentIntensity: Float?
+	public var shadowRadius: Float?
+	public var shadowOpacity: Float?
+	public var skyboxBackgroundImageURL: String?
+	public var skyboxLightingEnvironmentImageURL: String?
+	
 	#if os(macOS)
-	public var localImage: NSImage?
+	public var localImage: NSUIImage?
 	#endif
 	#if os(iOS)
 	public var localImage: UIImage?
@@ -75,6 +102,19 @@ public struct TourItem: Codable, Hashable {
 		case title
 		case description
 		case imageURL
+		case exposureOffset
+		case enableDepthOfField
+		case aperture
+		case focusDistance
+		case duration
+		case sunAzimuth
+		case sunAltitude
+		case sunIntensity
+		case lightingEnvironmentIntensity
+		case shadowRadius
+		case shadowOpacity
+		case skyboxBackgroundImageURL
+		case skyboxLightingEnvironmentImageURL
 	}
 	
 	public func encode(to encoder: Encoder) throws {
@@ -87,6 +127,19 @@ public struct TourItem: Codable, Hashable {
 		try container.encode(title, forKey: .title)
 		try container.encodeIfPresent(description, forKey: .description)
 		try container.encode(imageURL, forKey: .imageURL)
+		try container.encode(exposureOffset, forKey: .exposureOffset)
+		try container.encodeIfPresent(enableDepthOfField, forKey: .enableDepthOfField)
+		try container.encodeIfPresent(aperture, forKey: .aperture)
+		try container.encodeIfPresent(focusDistance, forKey: .focusDistance)
+		try container.encodeIfPresent(duration, forKey: .duration)
+		try container.encodeIfPresent(sunAzimuth, forKey: .sunAzimuth)
+		try container.encodeIfPresent(sunAltitude, forKey: .sunAltitude)
+		try container.encodeIfPresent(sunIntensity, forKey: .sunIntensity)
+		try container.encodeIfPresent(lightingEnvironmentIntensity, forKey: .lightingEnvironmentIntensity)
+		try container.encodeIfPresent(shadowRadius, forKey: .shadowRadius)
+		try container.encodeIfPresent(shadowOpacity, forKey: .shadowOpacity)
+		try container.encodeIfPresent(skyboxBackgroundImageURL, forKey: .skyboxBackgroundImageURL)
+		try container.encodeIfPresent(skyboxLightingEnvironmentImageURL, forKey: .skyboxLightingEnvironmentImageURL)
 	}
 	
 	public init(from decoder: Decoder) throws {
@@ -99,5 +152,18 @@ public struct TourItem: Codable, Hashable {
 		self.title = try container.decode(String.self, forKey: .title)
 		self.description = try container.decodeIfPresent(String.self, forKey: .description)
 		self.imageURL = try container.decodeIfPresent(String.self, forKey: .imageURL)
+		self.exposureOffset = try container.decodeIfPresent(Float.self, forKey: .exposureOffset)
+		self.enableDepthOfField = try container.decodeIfPresent(Bool.self, forKey: .enableDepthOfField)
+		self.aperture = try container.decodeIfPresent(Float.self, forKey: .aperture)
+		self.focusDistance = try container.decodeIfPresent(Float.self, forKey: .focusDistance)
+		self.duration = try container.decodeIfPresent(Float.self, forKey: .duration)
+		self.sunAzimuth = try container.decodeIfPresent(Float.self, forKey: .sunAzimuth)
+		self.sunAltitude = try container.decodeIfPresent(Float.self, forKey: .sunAltitude)
+		self.sunIntensity = try container.decodeIfPresent(Float.self, forKey: .sunIntensity)
+		self.lightingEnvironmentIntensity = try container.decodeIfPresent(Float.self, forKey: .lightingEnvironmentIntensity)
+		self.shadowRadius = try container.decodeIfPresent(Float.self, forKey: .shadowRadius)
+		self.shadowOpacity = try container.decodeIfPresent(Float.self, forKey: .shadowOpacity)
+		self.skyboxBackgroundImageURL = try container.decodeIfPresent(String.self, forKey: .skyboxBackgroundImageURL)
+		self.skyboxLightingEnvironmentImageURL = try container.decodeIfPresent(String.self, forKey: .skyboxLightingEnvironmentImageURL)
 	}
 }

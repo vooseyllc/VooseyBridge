@@ -5,6 +5,7 @@
 //  Created by Justin Means on 10/10/21.
 //
 
+#if !os(Linux)
 import Foundation
 #if os(macOS)
 import AppKit
@@ -17,4 +18,5 @@ import UIKit
 public typealias NSUIImage = UIImage
 #else
 public typealias NSUIImage = NSImage
+#endif
 #endif

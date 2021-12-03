@@ -84,6 +84,16 @@ public struct Business {
 			self.coordinates = coordinates
 		}
 		
+		public init() {
+			self.displayName = ""
+			self.websiteURL = nil
+			self.profilePicURL = nil
+			self.description = nil
+			self.legalName = nil
+			self.address = nil
+			self.coordinates = nil
+		}
+		
 		public var displayName: String
 		public var websiteURL: String?
 		public var profilePicURL: String?

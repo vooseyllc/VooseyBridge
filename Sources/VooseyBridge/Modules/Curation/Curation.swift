@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JWSNewsBridge
+import JBSNews
 
 public struct Curation {
 	public struct Global: Codable, Hashable {

@@ -18,7 +18,8 @@ let package = Package(
             targets: ["VooseyBridge"]),
     ],
     dependencies: [
-		.package(url: "https://github.com/JustinMeans/JWSNewsBridge", from: "1.0.1"),
+//		.package(url: "https://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:x-oauth-basic@github.com/JustinMeans/JBS", .branch("main")),
+		.package(name: "JBS", path: "/Users/JustinMeans/documents/JMLLC/JWS/JBS")
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -28,7 +29,8 @@ let package = Package(
         .target(
             name: "VooseyBridge",
             dependencies: [
-				.product(name: "JWSNewsBridge", package: "JWSNewsBridge"),
+				.product(name: "JBSNews", package: "JBS"),
+				.product(name: "JBSAuth", package: "JBS")
 			]),
         .testTarget(
             name: "VooseyBridgeTests",

@@ -18,7 +18,7 @@ let package = Package(
             targets: ["VooseyBridge"]),
     ],
     dependencies: [
-		.package(url: "git@github.com:JustinMeans/JBS", .branch("main")),
+		.package(url: "https://JustinMeans:Nimbus+8521Github/JustinMeans/JBS.git", .branch("main")),
 //		.package(name: "JBS", path: "/Users/JustinMeans/documents/JMLLC/JWS/JBS")
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),

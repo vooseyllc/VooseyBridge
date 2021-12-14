@@ -33,9 +33,10 @@ public struct User: Codable, Hashable {
 //	}
 	
 	public struct Global: GlobalUserRepresentable {
-		public init(businessTeams: [BusinessTeamMember.Global]? = nil, micro: User.Micro) {
+		public init(businessTeams: [BusinessTeamMember.Global]? = nil, micro: User.Micro, favoriteShowcases: [Showcase.Micro]?) {
 			self.businessTeams = businessTeams
 			self.micro = micro
+			self.favoriteShowcases = favoriteShowcases
 		}
 		
 		public var id: UUID {
@@ -43,6 +44,7 @@ public struct User: Codable, Hashable {
 		}
 		public var businessTeams: [BusinessTeamMember.Global]?
 		public var micro: Micro
+		public var favoriteShowcases: [Showcase.Micro]?
 	}
 	
 	public struct Micro: MicroUserRepresentable {
@@ -79,10 +81,9 @@ public struct User: Codable, Hashable {
 			self.businessTeams = businessTeams
 			self.projects = projects
 			self.totalBytesUsed = totalBytesUsed
-			self.favoriteShowcases = favoriteShowcases
 //			let bt = (self.businessTeams ?? []).map({ BusinessTeamMember.Global(id: $0.id, business: $0.business, user: $0.user, role: $0.role)}), micro: self.micro})
 			let bt: [BusinessTeamMember.Global] = []
-		self.global = User.Global(businessTeams: bt, micro: self.micro)
+			self.global = User.Global(businessTeams: bt, micro: self.micro, favoriteShowcases: favoriteShowcases)
 		}
 		
 		
@@ -95,7 +96,6 @@ public struct User: Codable, Hashable {
 		public var businessTeams: [BusinessTeamMember.Personal]?
 		public var projects: [Project.Global]?
 		public var totalBytesUsed: Int?
-		public var favoriteShowcases: [Showcase.Micro]?
 	}
 	
 	public struct CreateData: Codable {

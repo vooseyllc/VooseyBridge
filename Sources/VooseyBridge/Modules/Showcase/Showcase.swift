@@ -9,10 +9,11 @@ import Foundation
 
 public struct Showcase {
 	public struct Global: Codable, Identifiable, Hashable {
-		public init(micro: Showcase.Micro, business: Business.Micro, tour: [TourItem]) {
+		public init(tour: [TourItem], micro: Showcase.Micro, business: Business.Micro, isFavorite: Bool?) {
+			self.tour = tour
 			self.micro = micro
 			self.business = business
-			self.tour = tour
+			self.isFavorite = isFavorite
 		}
 		
 		public var id: UUID? {
@@ -21,6 +22,7 @@ public struct Showcase {
 		public var tour: [TourItem]
 		public var micro: Micro
 		public var business: Business.Micro
+		public var isFavorite: Bool?
 	}
 	
 	public struct Micro: Codable, Identifiable, Hashable {

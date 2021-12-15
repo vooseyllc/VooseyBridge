@@ -25,7 +25,27 @@ public struct Business {
 		public var showcases: [Showcase.Global]?
 	}
 	
-	public struct Micro: Codable, Identifiable, Hashable {
+	public struct Micro: Codable, Identifiable, Hashable, RawRepresentable {
+		public init?(rawValue: Data) {
+			if let value = try? JSONDecoder().decode(Business.Micro.self, from: rawValue) {
+				self.init(micro: value)
+			} else {
+				return nil
+			}
+			
+		}
+		
+		init(micro: Business.Micro) {
+			self = micro
+		}
+		
+		public var rawValue: Data {
+			let data = try? JSONEncoder().encode(self)
+			return data ?? Data()
+		}
+		
+		public typealias RawValue = Data
+		
 		public init(id: UUID? = nil, displayName: String, websiteURL: String? = nil, profilePicURL: String? = nil, description: String? = nil, legalName: String? = nil, address: String? = nil, coordinates: String? = nil) {
 			self.id = id
 			self.displayName = displayName
@@ -103,3 +123,50 @@ public struct Business {
 		public var coordinates: String?
 	}
 }
+
+//extension Optional: RawRepresentable where Wrapped == Business.Micro {
+//	public typealias RawValue = String
+//	public init?(rawValue: RawValue) {
+////		guard let data = rawValue.data(using: .utf8) else { return nil }
+////		if let micro = Wrapped.init(rawValue: rawValue.data(using: .utf8) ?? Data()) {
+////			self.init(Wrapped.init(micro: micro))
+////		} else {
+////			return nil
+////		}
+//		let d = rawValue.data(using: .utf8)
+//		if let d = d {
+//			if let micro = Wrapped.init(rawValue: d) {
+//				self.init(Wrapped.init(micro: micro))
+//			}
+//		}
+//		return nil
+//	}
+//	
+//	public var rawValue: String {
+//		return ""
+//	}
+//}
+
+//extension Optional: RawRepresentable where Wrapped == Business.Micro {
+//	public init?(rawValue: Data) {
+//		return nil
+////		if let micro = Wrapped.init(rawValue: rawValue) {
+////			self.init(Wrapped.init(micro: micro))
+////		} else {
+////			return nil
+////		}
+//	}
+//
+//	public var rawValue: Data {
+////		return self?.rawValue ?? Data()
+//		return Data()
+////		self.map { business in
+////			return business.rawValue
+////		}
+////		return Data()
+//	}
+//
+//	public typealias RawValue = Data
+//
+//
+//}

@@ -7,6 +7,7 @@
 
 import Foundation
 import JBSAuth
+import JBSModerate
 
 public struct User: Codable, Hashable {
 //	public struct RegistrationData: Codable {
@@ -33,22 +34,32 @@ public struct User: Codable, Hashable {
 //	}
 	
 	public struct Global: GlobalUserRepresentable {
-		public init(businessTeams: [BusinessTeamMember.Global]? = nil, micro: User.Micro, favoriteShowcases: [Showcase.Micro]?) {
+		public init(relationship: RelationshipStatus?, businessTeams: [BusinessTeamMember.Global]? = nil, micro: User.Micro, savedShowcases: [Showcase.Micro]? = nil) {
+			self.relationship = relationship
 			self.businessTeams = businessTeams
 			self.micro = micro
-			self.favoriteShowcases = favoriteShowcases
+			self.savedShowcases = savedShowcases
 		}
 		
-		public var id: UUID {
+		public var relationship: RelationshipStatus?
+		
+		
+		public var id: UUID? {
 			micro.id
 		}
 		public var businessTeams: [BusinessTeamMember.Global]?
 		public var micro: Micro
-		public var favoriteShowcases: [Showcase.Micro]?
+		public var savedShowcases: [Showcase.Micro]?
 	}
 	
-	public struct Micro: MicroUserRepresentable {
-		public init(id: UUID, username: String, profilePicURL: String? = nil, firstName: String? = nil, lastName: String? = nil, name: String? = nil, websiteURL: String? = nil, createdDate: Date? = nil) {
+	public struct Micro: MicroUserRepresentable, Reportable {
+		public var reportMeta: ReportMetadata {
+			ReportMetadata(title: self.name, imageURLString: self.profilePicURL, creatorName: self.name, date: self.createdDate)
+		}
+		
+		public var schema: ReportSchema { ReportSchema.user }
+		
+		public init(id: UUID?, username: String, profilePicURL: String? = nil, firstName: String? = nil, lastName: String? = nil, name: String? = nil, websiteURL: String? = nil, createdDate: Date? = nil) {
 			self.id = id
 			self.username = username
 			self.profilePicURL = profilePicURL
@@ -59,7 +70,7 @@ public struct User: Codable, Hashable {
 			self.createdDate = createdDate
 		}
 		
-		public var id: UUID
+		public var id: UUID?
 		public var username: String
 		public var profilePicURL: String?
 		public var firstName: String?
@@ -74,7 +85,7 @@ public struct User: Codable, Hashable {
 		
 		public typealias Global = User.Global
 		
-		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, favoriteShowcases: [Showcase.Micro]? = nil) {
+		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, savedShowcases: [Showcase.Micro]? = nil) {
 			self.micro = micro
 			self.email = email
 			self.token = token
@@ -83,11 +94,11 @@ public struct User: Codable, Hashable {
 			self.totalBytesUsed = totalBytesUsed
 //			let bt = (self.businessTeams ?? []).map({ BusinessTeamMember.Global(id: $0.id, business: $0.business, user: $0.user, role: $0.role)}), micro: self.micro})
 			let bt: [BusinessTeamMember.Global] = []
-			self.global = User.Global(businessTeams: bt, micro: self.micro, favoriteShowcases: favoriteShowcases)
+			self.global = User.Global(relationship: nil, businessTeams: bt, micro: self.micro, savedShowcases: savedShowcases)
 		}
 		
 		
-		public var id: UUID {
+		public var id: UUID? {
 			micro.id
 		}
 		public var micro: Micro

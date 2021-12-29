@@ -11,8 +11,10 @@ public enum TeamRole: StringLiteralType, RawRepresentable, Codable {
 	public static let schema = "team_role_enum"
 	case owner
 	case principal
+//	case architect
 	case projectManager
 	case interiorDesigner
+//	case interiorDecorator
 	case drafter
 	case visualization
 	case engineer
@@ -21,11 +23,19 @@ public enum TeamRole: StringLiteralType, RawRepresentable, Codable {
 	case developer
 	case consultant
 	case accountant
+//	case lightingDesigner
 	case lighting
 	case constructionManager
 	case landscape
 	case surveyor
 	case investor
+//	case modeler
+//	case logistics
+//	case technologyConsultant
+//	case structural
+//	case mechanical
+//	case electrical
+//	case lightingEngineer
 	
 	public var hasPrivateAccess: Bool {
 		switch self {

@@ -7,11 +7,11 @@
 
 import Foundation
 
-public enum SearchResult: Codable, Identifiable {
+public enum SearchResult: Codable, Identifiable, Equatable {
 	public var id: String? {
 		switch self {
 			case .user(let user):
-				return user.id.uuidString
+				return user.id?.uuidString
 			case .business(let business):
 				return business.id?.uuidString
 			case .showcase(let showcase):

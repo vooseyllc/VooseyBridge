@@ -6,14 +6,19 @@
 //
 
 import Foundation
+import JBSModerate
+
+public extension ReportSchema {
+	static let showcase = ReportSchema(rawValue: "showcases")
+}
 
 public struct Showcase {
 	public struct Global: Codable, Identifiable, Hashable {
-		public init(tour: [TourItem], micro: Showcase.Micro, business: Business.Micro, isFavorite: Bool?) {
+		public init(tour: [TourItem], micro: Showcase.Micro, business: Business.Micro, isSaved: Bool?) {
 			self.tour = tour
 			self.micro = micro
 			self.business = business
-			self.isFavorite = isFavorite
+			self.isSaved = isSaved
 		}
 		
 		public var id: UUID? {
@@ -22,10 +27,16 @@ public struct Showcase {
 		public var tour: [TourItem]
 		public var micro: Micro
 		public var business: Business.Micro
-		public var isFavorite: Bool?
+		public var isSaved: Bool?
 	}
 	
-	public struct Micro: Codable, Identifiable, Hashable {
+	public struct Micro: Codable, Identifiable, Hashable, Reportable {
+		public var reportMeta: ReportMetadata {
+			ReportMetadata(title: self.title, imageURLString: self.featuredImageURL, creatorName: self.business.displayName, date: self.createdDate)
+		}
+		
+		public var schema: ReportSchema { .showcase}
+		
 		public init(id: UUID? = nil, title: String, description: String? = nil, websiteURL: String? = nil, coordinates: String? = nil, imageURLs: [String], business: Business.Micro, sqft: Double? = nil, beds: Int? = nil, baths: Double? = nil, floors: Double? = nil, garages: Int? = nil, length: Double, depth: Double, height: Double, tags: [String]? = nil, published: Bool, modelURL: String, pdfURL: String? = nil, featuredImageURL: String? = nil, createdDate: Date? = nil, editedDate: Date? = nil) {
 			self.id = id
 			self.title = title

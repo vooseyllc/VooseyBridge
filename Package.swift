@@ -18,7 +18,7 @@ let package = Package(
             targets: ["VooseyBridge"]),
     ],
     dependencies: [
-		.package(url: "https://\("ghp_KbnPDE1nrX3Ir1sAdU1INkt3i" + "cagio11gRmz"):x-oauth-basic@github.com/JustinMeans/JBS", from: "1.7.0"),
+		.package(url: "https://\("ghp_KbnPDE1nrX3Ir1sAdU1INkt3i" + "cagio11gRmz"):x-oauth-basic@github.com/JustinMeans/JBS", .branch("master")),
 //		.package(name: "JBS", path: "/Users/JustinMeans/documents/JMLLC/JWS/JBS")
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),

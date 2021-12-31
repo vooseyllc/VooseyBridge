@@ -85,7 +85,7 @@ public struct User: Codable, Hashable {
 		
 		public typealias Global = User.Global
 		
-		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, savedShowcases: [Showcase.Micro]? = nil) {
+		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, savedShowcases: [Showcase.Micro]? = nil, hasAcceptedTermsAndConditions: Bool, hasAcceptedPrivacyPolicy: Bool) {
 			self.micro = micro
 			self.email = email
 			self.token = token
@@ -95,6 +95,8 @@ public struct User: Codable, Hashable {
 //			let bt = (self.businessTeams ?? []).map({ BusinessTeamMember.Global(id: $0.id, business: $0.business, user: $0.user, role: $0.role)}), micro: self.micro})
 			let bt: [BusinessTeamMember.Global] = []
 			self.global = User.Global(relationship: nil, businessTeams: bt, micro: self.micro, savedShowcases: savedShowcases)
+			self.hasAcceptedTermsAndConditions = hasAcceptedTermsAndConditions
+			self.hasAcceptedPrivacyPolicy = hasAcceptedPrivacyPolicy
 		}
 		
 		
@@ -107,6 +109,8 @@ public struct User: Codable, Hashable {
 		public var businessTeams: [BusinessTeamMember.Personal]?
 		public var projects: [Project.Global]?
 		public var totalBytesUsed: Int?
+		public var hasAcceptedTermsAndConditions: Bool
+		public var hasAcceptedPrivacyPolicy: Bool
 	}
 	
 	public struct CreateData: Codable {

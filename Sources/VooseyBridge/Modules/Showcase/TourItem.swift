@@ -12,6 +12,7 @@ import AppKit
 #if os(iOS)
 import UIKit
 #endif
+import JBSCore
 
 public struct TourItem: Codable, Hashable {
 	#if !os(Linux)

@@ -34,22 +34,23 @@ public struct User: Codable, Hashable {
 //	}
 	
 	public struct Global: GlobalUserRepresentable {
-		public init(relationship: RelationshipStatus?, businessTeams: [BusinessTeamMember.Global]? = nil, micro: User.Micro, savedShowcases: [Showcase.Micro]? = nil) {
+		public init(relationship: RelationshipStatus? = nil, businessTeams: [BusinessTeamMember.Global]? = nil, micro: User.Micro, savedShowcases: [KundaShowcase.Micro]? = nil, savedDomaShowcases: [DomaShowcase.Micro]? = nil) {
 			self.relationship = relationship
 			self.businessTeams = businessTeams
 			self.micro = micro
 			self.savedShowcases = savedShowcases
+			self.savedDomaShowcases = savedDomaShowcases
 		}
 		
+		
 		public var relationship: RelationshipStatus?
-		
-		
 		public var id: UUID? {
 			micro.id
 		}
 		public var businessTeams: [BusinessTeamMember.Global]?
 		public var micro: Micro
-		public var savedShowcases: [Showcase.Micro]?
+		public var savedShowcases: [KundaShowcase.Micro]?
+		public var savedDomaShowcases: [DomaShowcase.Micro]?
 	}
 	
 	public struct Micro: MicroUserRepresentable, Reportable {
@@ -85,7 +86,7 @@ public struct User: Codable, Hashable {
 		
 		public typealias Global = User.Global
 		
-		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, savedShowcases: [Showcase.Micro]? = nil, hasAcceptedTermsAndConditions: Bool, hasAcceptedPrivacyPolicy: Bool) {
+		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, savedDomaShowcases: [DomaShowcase.Micro]? = nil, savedShowcases: [KundaShowcase.Micro]? = nil, hasAcceptedTermsAndConditions: Bool, hasAcceptedPrivacyPolicy: Bool) {
 			self.micro = micro
 			self.email = email
 			self.token = token

@@ -21,7 +21,7 @@ public struct Doma {
 	}
 	
 	public struct Micro: Codable, Identifiable, Hashable {
-		public init(id: UUID? = nil, title: String? = nil, description: String, sqft: Float? = nil, beds: Int? = nil, baths: Float? = nil, floors: Float? = nil, garages: Int? = nil, length: Float, depth: Float, height: Float, modelURL: String, featuredImageURL: String? = nil) {
+		public init(id: UUID? = nil, title: String? = nil, description: String, sqft: Float? = nil, beds: Int? = nil, baths: Float? = nil, floors: Float? = nil, garages: Int? = nil, length: Float, depth: Float, height: Float, modelURL: String, featuredImageURL: String? = nil, createdDate: Date? = nil, updatedDate: Date? = nil) {
 			self.id = id
 			self.title = title
 			self.description = description
@@ -35,7 +35,10 @@ public struct Doma {
 			self.height = height
 			self.modelURL = modelURL
 			self.featuredImageURL = featuredImageURL
+			self.createdDate = createdDate
+			self.updatedDate = updatedDate
 		}
+		
 		
 		public var id: UUID?
 		public var title: String?
@@ -50,10 +53,17 @@ public struct Doma {
 		public var height: Float
 		public var modelURL: String
 		public var featuredImageURL: String?
+		public var createdDate: Date?
+		public var updatedDate: Date?
 		//Scenes in real data model
 	}
 	
 	public struct Create: Codable {
+		public init(micro: Doma.Micro, businessID: UUID) {
+			self.micro = micro
+			self.businessID = businessID
+		}
+		
 		public var micro: Micro
 		public var businessID: UUID
 		

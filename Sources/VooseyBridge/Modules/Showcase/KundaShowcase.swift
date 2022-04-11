@@ -12,9 +12,9 @@ public extension ReportSchema {
 	static let showcase = ReportSchema(rawValue: "showcases")
 }
 
-public struct Showcase {
+public struct KundaShowcase {
 	public struct Global: Codable, Identifiable, Hashable {
-		public init(tour: [TourItem], micro: Showcase.Micro, business: Business.Micro, isSaved: Bool?) {
+		public init(tour: [TourItem], micro: KundaShowcase.Micro, business: Business.Micro, isSaved: Bool?) {
 			self.tour = tour
 			self.micro = micro
 			self.business = business
@@ -91,7 +91,7 @@ public struct Showcase {
 			micro.id
 		}
 		
-		public init(micro: Showcase.Micro, businessID: UUID, tour: [TourItem]) {
+		public init(micro: KundaShowcase.Micro, businessID: UUID, tour: [TourItem]) {
 			self.micro = micro
 			self.businessID = businessID
 			self.tour = tour

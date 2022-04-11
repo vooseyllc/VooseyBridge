@@ -32,7 +32,7 @@ public enum SearchResult: Codable, Identifiable, Equatable {
 				let business = try container.decode(Business.Micro.self, forKey: .business)
 				self = .business(business)
 			case .showcase:
-				let showcase = try container.decode(Showcase.Micro.self, forKey: .showcase)
+				let showcase = try container.decode(KundaShowcase.Micro.self, forKey: .showcase)
 				self = .showcase(showcase)
 			case .tourItem:
 				let tourItem = try container.decode(TourItem.self, forKey: .tourItem)
@@ -70,6 +70,6 @@ public enum SearchResult: Codable, Identifiable, Equatable {
 	
 	case user(User.Micro)
 	case business(Business.Micro)
-	case showcase(Showcase.Micro)
+	case showcase(KundaShowcase.Micro)
 	case tourItem(TourItem)
 }

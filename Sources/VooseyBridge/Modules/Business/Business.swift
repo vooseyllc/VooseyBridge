@@ -9,11 +9,14 @@ import Foundation
 
 public struct Business {
 	public struct Global: Codable, Identifiable, Hashable {
-		public init(micro: Business.Micro, team: [BusinessTeamMember.Global], showcases: [Showcase.Global]) {
+		public init(micro: Business.Micro, team: [BusinessTeamMember.Global], showcases: [KundaShowcase.Global]? = nil, domaShowcases: [DomaShowcase.Global]? = nil, products: [Product.Global]? = nil) {
 			self.micro = micro
 			self.team = team
 			self.showcases = showcases
+			self.domaShowcases = domaShowcases
+			self.products = products
 		}
+		
 		public var id: UUID? {
 			micro.id
 		}
@@ -22,10 +25,23 @@ public struct Business {
 		}
 		public var micro: Micro
 		public var team: [BusinessTeamMember.Global]
-		public var showcases: [Showcase.Global]?
+		public var showcases: [KundaShowcase.Global]?
+		public var domaShowcases: [DomaShowcase.Global]?
+		public var products: [Product.Global]?
 	}
 	
 	public struct Micro: Codable, Identifiable, Hashable, RawRepresentable {
+		public init(id: UUID? = nil, displayName: String, websiteURL: String? = nil, profilePicURL: String? = nil, description: String? = nil, legalName: String? = nil, address: String? = nil, coordinates: String? = nil) {
+			self.id = id
+			self.displayName = displayName
+			self.websiteURL = websiteURL
+			self.profilePicURL = profilePicURL
+			self.description = description
+			self.legalName = legalName
+			self.address = address
+			self.coordinates = coordinates
+		}
+		
 		public init?(rawValue: Data) {
 			if let value = try? JSONDecoder().decode(Business.Micro.self, from: rawValue) {
 				self.init(micro: value)
@@ -45,18 +61,6 @@ public struct Business {
 		}
 		
 		public typealias RawValue = Data
-		
-		public init(id: UUID? = nil, displayName: String, websiteURL: String? = nil, profilePicURL: String? = nil, description: String? = nil, legalName: String? = nil, address: String? = nil, coordinates: String? = nil) {
-			self.id = id
-			self.displayName = displayName
-			self.websiteURL = websiteURL
-			self.profilePicURL = profilePicURL
-			self.description = description
-			self.legalName = legalName
-			self.address = address
-			self.coordinates = coordinates
-		}
-		
 		public var id: UUID?
 		public var displayName: String
 		public var websiteURL: String?
@@ -68,13 +72,17 @@ public struct Business {
 	}
 	
 	public struct Personal: Codable, Identifiable, Hashable {
-		public init(micro: Business.Micro, team: [BusinessTeamMember.Personal], showcases: [Showcase.Global]? = nil, totalBytesUsed: Int? = nil) {
+		public init(micro: Business.Micro, team: [BusinessTeamMember.Personal], showcases: [KundaShowcase.Global]? = nil, domaShowcases: [DomaShowcase.Global]? = nil, projects: [Project.Global]? = nil, products: [Product.Global]? = nil, scenes: [DomaScene.Global]? = nil, models: [Doma.Micro]? = nil, totalBytesUsed: Int? = nil) {
 			self.micro = micro
 			self.team = team
 			self.showcases = showcases
+			self.domaShowcases = domaShowcases
+			self.projects = projects
+			self.products = products
+			self.scenes = scenes
+			self.models = models
 			self.totalBytesUsed = totalBytesUsed
 		}
-		
 		
 		public static func == (lhs: Business.Personal, rhs: Business.Personal) -> Bool {
 			return lhs.micro == rhs.micro && lhs.totalBytesUsed == rhs.totalBytesUsed
@@ -84,7 +92,12 @@ public struct Business {
 		}
 		public var micro: Micro
 		public var team: [BusinessTeamMember.Personal]
-		public var showcases: [Showcase.Global]?
+		public var showcases: [KundaShowcase.Global]?
+		public var domaShowcases: [DomaShowcase.Global]?
+		public var projects: [Project.Global]?
+		public var products: [Product.Global]?
+		public var scenes: [DomaScene.Global]?
+		public var models: [Doma.Micro]?
 //		public var clients: [Client]
 		public var totalBytesUsed: Int?
 		

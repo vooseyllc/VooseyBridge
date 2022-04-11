@@ -14,9 +14,10 @@ import UIKit
 #endif
 import JBSCore
 
+//TODO: Add multi camera support
 public struct TourItem: Codable, Hashable {
 	#if !os(Linux)
-	public init(id: UUID? = nil, showcase: Showcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Double, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil, localImage: NSUIImage? = nil) {
+	public init(id: UUID? = nil, showcase: KundaShowcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Float, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil, localImage: NSUIImage? = nil, clippingPlaneElevation: Float? = nil, enableClippingPlane: Bool? = nil) {
 		self.id = id
 		self.showcase = showcase
 		self.camPosition = camPosition
@@ -39,9 +40,11 @@ public struct TourItem: Codable, Hashable {
 		self.skyboxBackgroundImageURL = skyboxBackgroundImageURL
 		self.skyboxLightingEnvironmentImageURL = skyboxLightingEnvironmentImageURL
 		self.localImage = localImage
+		self.clippingPlaneElevation = clippingPlaneElevation
+		self.enableClippingPlane = enableClippingPlane
 	}
 	#endif
-	public init(id: UUID? = nil, showcase: Showcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Double, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil) {
+	public init(id: UUID? = nil, showcase: KundaShowcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Float, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil, clippingPlaneElevation: Float? = nil, enableClippingPlane: Bool? = nil) {
 		self.id = id
 		self.showcase = showcase
 		self.camPosition = camPosition
@@ -63,13 +66,15 @@ public struct TourItem: Codable, Hashable {
 		self.shadowOpacity = shadowOpacity
 		self.skyboxBackgroundImageURL = skyboxBackgroundImageURL
 		self.skyboxLightingEnvironmentImageURL = skyboxLightingEnvironmentImageURL
+		self.clippingPlaneElevation = clippingPlaneElevation
+		self.enableClippingPlane = enableClippingPlane
 	}
 	
 	public var id: UUID?
-	public var showcase: Showcase.Micro?
+	public var showcase: KundaShowcase.Micro?
 	public var camPosition: VooseyVector3
 	public var camOrientation: VooseyVector4
-	public var camPov: Double
+	public var camPov: Float
 	public var title: String
 	public var description: String?
 	public var imageURL: String?
@@ -86,6 +91,8 @@ public struct TourItem: Codable, Hashable {
 	public var shadowOpacity: Float?
 	public var skyboxBackgroundImageURL: String?
 	public var skyboxLightingEnvironmentImageURL: String?
+	public var clippingPlaneElevation: Float?
+	public var enableClippingPlane: Bool?
 	
 	#if os(macOS)
 	public var localImage: NSUIImage?
@@ -146,10 +153,10 @@ public struct TourItem: Codable, Hashable {
 	public init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		self.id = try container.decodeIfPresent(UUID.self, forKey: .id)
-		self.showcase = try container.decodeIfPresent(Showcase.Micro.self, forKey: .showcase)
+		self.showcase = try container.decodeIfPresent(KundaShowcase.Micro.self, forKey: .showcase)
 		self.camPosition = try container.decode(VooseyVector3.self, forKey: .camPosition)
 		self.camOrientation = try container.decode(VooseyVector4.self, forKey: .camOrientation)
-		self.camPov = try container.decode(Double.self, forKey: .camPov)
+		self.camPov = try container.decode(Float.self, forKey: .camPov)
 		self.title = try container.decode(String.self, forKey: .title)
 		self.description = try container.decodeIfPresent(String.self, forKey: .description)
 		self.imageURL = try container.decodeIfPresent(String.self, forKey: .imageURL)

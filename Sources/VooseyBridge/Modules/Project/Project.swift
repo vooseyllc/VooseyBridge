@@ -30,38 +30,22 @@ public struct Project {
 	}
 	
 	public struct Micro: DomaMicroMetaRepresentable {
-		public init(id: UUID? = nil, title: String, description: String? = nil, websiteURL: String? = nil, coordinates: String? = nil, imageURLs: [String], business: Business.Micro, tags: [String]? = nil, published: Bool, featuredImageURL: String? = nil, createdDate: Date? = nil, updatedDate: Date? = nil) {
-			self.id = id
-			self.title = title
-			self.description = description
-			self.websiteURL = websiteURL
-			self.coordinates = coordinates
-			self.imageURLs = imageURLs
-			self.business = business
-			self.tags = tags
-			self.published = published
-			self.featuredImageURL = featuredImageURL
-			self.createdDate = createdDate
-			self.updatedDate = updatedDate
+		public init(meta: DomaMeta) {
+			self.meta = meta
 		}
 		
-		public var id: UUID?
-		public var title: String
-		public var description: String?
-		public var websiteURL: String?
-		public var coordinates: String?
-		public var imageURLs: [String]
-		public var business: Business.Micro
-		public var tags: [String]?
-		public var published: Bool
-		public var featuredImageURL: String?
-		public var createdDate: Date?
-		public var updatedDate: Date?
+		public var meta: DomaMeta
 		public var schema: ReportSchema { ReportSchema.project }
-		public var reportMeta: ReportMetadata { ReportMetadata(title: self.title, imageURLString: self.featuredImageURL, creatorName: self.business.displayName, date: self.createdDate) }
+		
 	}
 	
 	public struct Create: DomaCreateMetaRepresentable {
+		public init(micro: Project.Micro, businessID: UUID, scenes: [DomaScene.Global]) {
+			self.micro = micro
+			self.businessID = businessID
+			self.scenes = scenes
+		}
+		
 		public var micro: Micro
 		public var businessID: UUID
 		public var scenes: [DomaScene.Global]

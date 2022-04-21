@@ -11,6 +11,7 @@ import JBSCore
 
 public protocol DomaMicroMetaRepresentable: Reportable, Codable, Identifiable, Hashable {
 	var meta: DomaMeta { get set }
+	var metaMap: MetaMap.Micro { get set }
 //	var id: UUID? { get set }
 //	var title: String { get set }
 //	var description: String? { get set }
@@ -101,6 +102,7 @@ public protocol DomaGlobalMetaRepresentable: Codable, Identifiable, Hashable {
 	var officialScenes: [DomaScene.Global] { get set }
 	var userScenes: [DomaScene.Global] { get set }
 	var isSaved: Bool? { get set }
+	var metaMap: MetaMap.Global { get set }
 }
 
 public protocol DomaCreateMetaRepresentable: Codable {

@@ -27,6 +27,16 @@ public struct Project {
 		public var team: [BusinessTeamMember.Global]
 		public var clients: [User.Micro]
 		public var isSaved: Bool?
+		public var metaMap: MetaMap.Global {
+			get {
+				.project(self)
+			}
+			set {
+				if case let .project(project) = newValue {
+					self = project
+				}
+			}
+		}
 	}
 	
 	public struct Micro: DomaMicroMetaRepresentable {
@@ -36,7 +46,16 @@ public struct Project {
 		
 		public var meta: DomaMeta
 		public var schema: ReportSchema { ReportSchema.project }
-		
+		public var metaMap: MetaMap.Micro {
+			get {
+				.project(self)
+			}
+			set {
+				if case let .project(project) = newValue {
+					self = project
+				}
+			}
+		}
 	}
 	
 	public struct Create: DomaCreateMetaRepresentable {

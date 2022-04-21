@@ -23,6 +23,16 @@ public struct DomaShowcase {
 		public var micro: Micro
 		public var id: UUID? { micro.id }
 		public var isSaved: Bool?
+		public var metaMap: MetaMap.Global {
+			get {
+				.showcase(self)
+			}
+			set {
+				if case let .showcase(showcase) = newValue {
+					self = showcase
+				}
+			}
+		}
 	}
 	
 	public struct Micro: DomaMicroMetaRepresentable {
@@ -33,6 +43,16 @@ public struct DomaShowcase {
 		public var meta: DomaMeta
 		public var schema: ReportSchema { ReportSchema.showcase2 }
 		public var reportMeta: ReportMetadata { ReportMetadata(title: self.meta.title, imageURLString: self.meta.featuredImageURL, creatorName: self.meta.business.displayName, date: self.meta.updatedDate) }
+		public var metaMap: MetaMap.Micro {
+			get {
+				.showcase(self)
+			}
+			set {
+				if case let .showcase(showcase) = newValue {
+					self = showcase
+				}
+			}
+		}
 		
 	}
 	

@@ -20,6 +20,16 @@ public struct Product {
 		public var schema: ReportSchema { ReportSchema.product }
 		public var priceUSD: Float
 		public var salePriceUSD: Float?
+		public var metaMap: MetaMap.Micro {
+			get {
+				.product(self)
+			}
+			set {
+				if case let .product(product) = newValue {
+					self = product
+				}
+			}
+		}
 	}
 	
 	public struct Global: DomaGlobalMetaRepresentable {
@@ -36,6 +46,16 @@ public struct Product {
 		public var id: UUID? { micro.id }
 		public var micro: Product.Micro
 		public var isSaved: Bool?
+		public var metaMap: MetaMap.Global {
+			get {
+				.product(self)
+			}
+			set {
+				if case let .product(product) = newValue {
+					self = product
+				}
+			}
+		}
 	}
 	
 	public struct Create: DomaCreateMetaRepresentable {

@@ -62,6 +62,26 @@ public struct DomaScene {
 		#if os(iOS) || os(macOS)
 		@NonCodable public var localFeaturedImage: NSUIImage?
 		#endif
+		
+		enum CodingKeys: String, CodingKey {
+			case global
+			case businessID
+			case userID
+		}
+		
+		public init(from decoder: Decoder) throws {
+			let container = try decoder.container(keyedBy: CodingKeys.self)
+			self.global = try container.decode(DomaScene.Global.self, forKey: .global)
+			self.businessID = try container.decodeIfPresent(UUID.self, forKey: .businessID)
+			self.userID = try container.decodeIfPresent(UUID.self, forKey: .userID)
+		}
+		
+		public func encode(to encoder: Encoder) throws {
+			var container = encoder.container(keyedBy: CodingKeys.self)
+			try container.encode(global, forKey: .global)
+			try container.encodeIfPresent(businessID, forKey: .businessID)
+			try container.encodeIfPresent(userID, forKey: .userID)
+		}
 	}
 	
 }

@@ -13,6 +13,13 @@ public struct Business {
 			self.micro = micro
 		}
 		
+		public init(micro: Business.Micro, team: [BusinessTeamMember.Global], showcases: [KundaShowcase.Global]? = nil, domaShowcases: [DomaShowcase.Global]? = nil, products: [Product.Global]? = nil) {
+			self.micro = micro
+			self.team = team
+			self.showcases = showcases
+			self.domaShowcases = domaShowcases
+			self.products = products
+		}
 		
 		public var id: UUID? {
 			micro.id
@@ -71,6 +78,18 @@ public struct Business {
 	public struct Personal: Codable, Identifiable, Hashable {
 		public init(micro: Business.Micro, totalBytesUsed: Int? = nil) {
 			self.micro = micro
+			self.totalBytesUsed = totalBytesUsed
+		}
+		
+		public init(micro: Business.Micro, team: [BusinessTeamMember.Personal], showcases: [KundaShowcase.Global]? = nil, domaShowcases: [DomaShowcase.Global]? = nil, projects: [Project.Global]? = nil, products: [Product.Global]? = nil, scenes: [DomaScene.Global]? = nil, models: [Doma.Micro]? = nil, totalBytesUsed: Int? = nil) {
+			self.micro = micro
+			self.team = team
+			self.showcases = showcases
+			self.domaShowcases = domaShowcases
+			self.projects = projects
+			self.products = products
+			self.scenes = scenes
+			self.models = models
 			self.totalBytesUsed = totalBytesUsed
 		}
 		

@@ -82,11 +82,13 @@ public struct User: Codable, Hashable {
 	}
 	
 	public struct Personal: PersonalUserRepresentable {
+		public var messages: [Message.Global]?
+		
 		public var global: User.Global
 		
 		public typealias Global = User.Global
 		
-		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, savedDomaShowcases: [DomaShowcase.Micro]? = nil, savedShowcases: [KundaShowcase.Micro]? = nil, hasAcceptedTermsAndConditions: Bool, hasAcceptedPrivacyPolicy: Bool) {
+		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, savedDomaShowcases: [DomaShowcase.Micro]? = nil, savedShowcases: [KundaShowcase.Micro]? = nil, hasAcceptedTermsAndConditions: Bool, hasAcceptedPrivacyPolicy: Bool, messages: [Message.Global]?) {
 			self.micro = micro
 			self.email = email
 			self.token = token
@@ -98,6 +100,7 @@ public struct User: Codable, Hashable {
 			self.global = User.Global(relationship: nil, businessTeams: bt, micro: self.micro, savedShowcases: savedShowcases)
 			self.hasAcceptedTermsAndConditions = hasAcceptedTermsAndConditions
 			self.hasAcceptedPrivacyPolicy = hasAcceptedPrivacyPolicy
+			self.messages = messages
 		}
 		
 		

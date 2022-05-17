@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import JBSCore
 
-public enum TeamRole: StringLiteralType, RawRepresentable, Codable {
+public enum TeamRole: StringLiteralType, RawRepresentable, Codable, CircularCaseSequence {
 	public static let schema = "team_role_enum"
 	case owner
 	case principal

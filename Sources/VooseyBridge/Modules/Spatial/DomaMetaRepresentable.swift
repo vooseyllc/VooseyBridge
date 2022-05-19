@@ -168,6 +168,17 @@ public enum Metatype: String, Codable {
 	case showcase
 	case product
 	case project
+	
+	public var title: String {
+		switch self {
+			case .showcase:
+				return "Showcase"
+			case .product:
+				return "Product"
+			case .project:
+				return "Project"
+		}
+	}
 }
 
 public protocol DomaGlobalMetaRepresentable: Codable, Identifiable, Hashable {

@@ -9,9 +9,8 @@ import Foundation
 
 public struct FurnitureData {
 	public struct Micro: AssetData {
-		public var assetType: AssetType = .furniture
-		
-		public init(title: String, category: FurnitureCategory, id: UUID? = nil, imageURL: String, modelURL: String, length: Double, height: Double, depth: Double, description: String? = nil, imageURLs: [String]? = nil, priceUSD: Double? = nil, purchaseURL: String? = nil, totalBytes: Int, published: Bool, approved: Bool, anchorPosition: AnchorPosition) {
+		public init(assetType: AssetType = .furniture, title: String, category: FurnitureCategory, id: UUID? = nil, imageURL: String, modelURL: String, length: Double, height: Double, depth: Double, description: String? = nil, imageURLs: [String]? = nil, priceUSD: Double? = nil, purchaseURL: String? = nil, totalBytes: Int, published: Bool, approved: Bool, anchorPosition: FurnitureData.AnchorPosition, createdDate: Date? = nil, updatedDate: Date? = nil) {
+			self.assetType = assetType
 			self.title = title
 			self.category = category
 			self.id = id
@@ -28,7 +27,12 @@ public struct FurnitureData {
 			self.published = published
 			self.approved = approved
 			self.anchorPosition = anchorPosition
+			self.createdDate = createdDate
+			self.updatedDate = updatedDate
 		}
+		
+		public var assetType: AssetType = .furniture
+		
 		
 		public var title: String
 		public var category: FurnitureCategory
@@ -46,6 +50,8 @@ public struct FurnitureData {
 		public var published: Bool
 		public var approved: Bool
 		public var anchorPosition: AnchorPosition
+		public var createdDate: Date?
+		public var updatedDate: Date?
 	}
 	public struct Global: Codable, Hashable {
 		public init(user: User.Micro? = nil, business: Business.Micro? = nil, micro: FurnitureData.Micro) {

@@ -17,7 +17,7 @@ import JBSCore
 //TODO: Add multi camera support
 public struct TourItem: Codable, Hashable {
 	#if !os(Linux)
-	public init(id: UUID? = nil, showcase: KundaShowcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Float, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil, localImage: NSUIImage? = nil, clippingPlaneElevation: Float? = nil, enableClippingPlane: Bool? = nil) {
+	public init(id: UUID? = nil, showcase: KundaShowcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Float, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil, localImage: NSUIImage? = nil, clippingPlaneElevation: Float? = nil, enableClippingPlane: Bool? = nil, skyboxRotationDegrees: Float? = nil, cameraType: VooseyCameraType?) {
 		self.id = id
 		self.showcase = showcase
 		self.camPosition = camPosition
@@ -42,9 +42,11 @@ public struct TourItem: Codable, Hashable {
 		self.localImage = localImage
 		self.clippingPlaneElevation = clippingPlaneElevation
 		self.enableClippingPlane = enableClippingPlane
+		self.skyboxRotationDegrees = skyboxRotationDegrees
+		self.cameraType = cameraType
 	}
 	#endif
-	public init(id: UUID? = nil, showcase: KundaShowcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Float, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil, clippingPlaneElevation: Float? = nil, enableClippingPlane: Bool? = nil) {
+	public init(id: UUID? = nil, showcase: KundaShowcase.Micro? = nil, camPosition: VooseyVector3, camOrientation: VooseyVector4, camPov: Float, title: String, description: String? = nil, imageURL: String? = nil, exposureOffset: Float? = nil, enableDepthOfField: Bool? = nil, aperture: Float? = nil, focusDistance: Float? = nil, duration: Float? = nil, sunAzimuth: Float? = nil, sunAltitude: Float? = nil, sunIntensity: Float? = nil, lightingEnvironmentIntensity: Float? = nil, shadowRadius: Float? = nil, shadowOpacity: Float? = nil, skyboxBackgroundImageURL: String? = nil, skyboxLightingEnvironmentImageURL: String? = nil, clippingPlaneElevation: Float? = nil, enableClippingPlane: Bool? = nil, skyboxRotationDegrees: Float? = nil, cameraType: VooseyCameraType?) {
 		self.id = id
 		self.showcase = showcase
 		self.camPosition = camPosition
@@ -68,6 +70,8 @@ public struct TourItem: Codable, Hashable {
 		self.skyboxLightingEnvironmentImageURL = skyboxLightingEnvironmentImageURL
 		self.clippingPlaneElevation = clippingPlaneElevation
 		self.enableClippingPlane = enableClippingPlane
+		self.skyboxRotationDegrees = skyboxRotationDegrees
+		self.cameraType = cameraType
 	}
 	
 	public var id: UUID?
@@ -93,6 +97,8 @@ public struct TourItem: Codable, Hashable {
 	public var skyboxLightingEnvironmentImageURL: String?
 	public var clippingPlaneElevation: Float?
 	public var enableClippingPlane: Bool?
+	public var skyboxRotationDegrees: Float?
+	public var cameraType: VooseyCameraType?
 	
 	#if os(macOS)
 	public var localImage: NSUIImage?
@@ -123,6 +129,10 @@ public struct TourItem: Codable, Hashable {
 		case shadowOpacity
 		case skyboxBackgroundImageURL
 		case skyboxLightingEnvironmentImageURL
+		case clippingPlaneElevation
+		case enableClippingPlane
+		case skyboxRotationDegrees
+		case cameraType
 	}
 	
 	public func encode(to encoder: Encoder) throws {
@@ -148,6 +158,10 @@ public struct TourItem: Codable, Hashable {
 		try container.encodeIfPresent(shadowOpacity, forKey: .shadowOpacity)
 		try container.encodeIfPresent(skyboxBackgroundImageURL, forKey: .skyboxBackgroundImageURL)
 		try container.encodeIfPresent(skyboxLightingEnvironmentImageURL, forKey: .skyboxLightingEnvironmentImageURL)
+		try container.encodeIfPresent(clippingPlaneElevation, forKey: .clippingPlaneElevation)
+		try container.encodeIfPresent(enableClippingPlane, forKey: .enableClippingPlane)
+		try container.encodeIfPresent(skyboxRotationDegrees, forKey: .skyboxRotationDegrees)
+		try container.encodeIfPresent(cameraType, forKey: .cameraType)
 	}
 	
 	public init(from decoder: Decoder) throws {
@@ -173,5 +187,9 @@ public struct TourItem: Codable, Hashable {
 		self.shadowOpacity = try container.decodeIfPresent(Float.self, forKey: .shadowOpacity)
 		self.skyboxBackgroundImageURL = try container.decodeIfPresent(String.self, forKey: .skyboxBackgroundImageURL)
 		self.skyboxLightingEnvironmentImageURL = try container.decodeIfPresent(String.self, forKey: .skyboxLightingEnvironmentImageURL)
+		self.enableClippingPlane = try container.decodeIfPresent(Bool.self, forKey: .enableClippingPlane)
+		self.clippingPlaneElevation = try container.decodeIfPresent(Float.self, forKey: .clippingPlaneElevation)
+		self.skyboxRotationDegrees = try container.decodeIfPresent(Float.self, forKey: .skyboxRotationDegrees)
+		self.cameraType = try container.decodeIfPresent(VooseyCameraType.self, forKey: .cameraType)
 	}
 }

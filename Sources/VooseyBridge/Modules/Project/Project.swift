@@ -68,8 +68,8 @@ public struct Project {
 		public var micro: Micro
 		public var businessID: UUID
 		public var scenes: [DomaScene.Global]
-		
 	}
+	
 }
 
 public extension ReportSchema {

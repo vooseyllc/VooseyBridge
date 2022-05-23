@@ -9,9 +9,8 @@ import Foundation
 
 public struct MaterialData {
 	public struct Micro: AssetData {
-		public var assetType: AssetType = .material
-		
-		public init(title: String, id: UUID? = nil, roughness: Float? = nil, metalness: Float? = nil, specular: Float? = nil, diffuse: Float? = nil, opacity: Float? = nil, category: MaterialCategory, imageURL: String, approved: Bool, published: Bool) {
+		public init(assetType: AssetType = .material, title: String, id: UUID? = nil, roughness: Float? = nil, metalness: Float? = nil, specular: Float? = nil, diffuse: Float? = nil, opacity: Float? = nil, category: MaterialCategory, imageURL: String, approved: Bool, published: Bool, createdDate: Date? = nil, updatedDate: Date? = nil) {
+			self.assetType = assetType
 			self.title = title
 			self.id = id
 			self.roughness = roughness
@@ -23,8 +22,11 @@ public struct MaterialData {
 			self.imageURL = imageURL
 			self.approved = approved
 			self.published = published
+			self.createdDate = createdDate
+			self.updatedDate = updatedDate
 		}
 		
+		public var assetType: AssetType = .material
 		public var title: String
 		public var id: UUID?
 		public var roughness: Float?
@@ -36,6 +38,8 @@ public struct MaterialData {
 		public var imageURL: String
 		public var approved: Bool
 		public var published: Bool
+		public var createdDate: Date?
+		public var updatedDate: Date?
 	}
 	
 	public struct Global: Codable, Hashable {

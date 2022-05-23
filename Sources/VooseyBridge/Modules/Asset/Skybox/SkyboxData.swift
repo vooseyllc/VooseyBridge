@@ -9,9 +9,9 @@ import Foundation
 
 public struct SkyboxData {
 	public struct Micro: AssetData {
-		public var assetType: AssetType = .skybox
-		
-		public init(backgroundImageURL: String, lightingEnvironmentImageURL: String, imageURL: String, lightingEnvironmentIntensity: Float, sunIntensity: Float, title: String, category: SkyboxCategory, approved: Bool = false, published: Bool = true) {
+		public init(assetType: AssetType = .skybox, id: UUID? = nil, backgroundImageURL: String, lightingEnvironmentImageURL: String, imageURL: String, lightingEnvironmentIntensity: Float, sunIntensity: Float, title: String, category: SkyboxCategory, approved: Bool = false, published: Bool, createdDate: Date? = nil, updatedDate: Date? = nil) {
+			self.assetType = assetType
+			self.id = id
 			self.backgroundImageURL = backgroundImageURL
 			self.lightingEnvironmentImageURL = lightingEnvironmentImageURL
 			self.imageURL = imageURL
@@ -21,7 +21,12 @@ public struct SkyboxData {
 			self.category = category
 			self.approved = approved
 			self.published = published
+			self.createdDate = createdDate
+			self.updatedDate = updatedDate
 		}
+		
+		public var assetType: AssetType = .skybox
+		
 		public var id: UUID?
 		public var backgroundImageURL: String
 		public var lightingEnvironmentImageURL: String
@@ -32,6 +37,8 @@ public struct SkyboxData {
 		public var category: SkyboxCategory
 		public var approved: Bool
 		public var published: Bool
+		public var createdDate: Date?
+		public var updatedDate: Date?
 	}
 	
 	public struct Global: Codable, Hashable {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum VooseyCameraType: Codable {
+public enum VooseyCameraType: String, Codable, RawRepresentable {
 case firstPerson
 case thirdPerson
 case thirdPersonOrthographic

@@ -8,12 +8,12 @@
 import Foundation
 import JBSAuth
 
-public extension MessageAction {
-	static var accept: MessageAction {
-		MessageAction(rawValue: "accept")
-	}
-	static var decline: MessageAction {
-		MessageAction(rawValue: "decline")
-	}
-}
+//public extension MessageAction {
+//	static var accept: MessageAction {
+//		MessageAction(rawValue: "accept")
+//	}
+//	static var decline: MessageAction {
+//		MessageAction(rawValue: "decline")
+//	}
+//}
 

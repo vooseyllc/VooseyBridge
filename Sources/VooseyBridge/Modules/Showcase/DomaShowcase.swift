@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JBSModerate
+import JBS
 
 public struct DomaShowcase {
 	public struct Global: DomaGlobalMetaRepresentable {

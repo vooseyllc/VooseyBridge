@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JBSAuth
+import JBS
 
 public struct TeamInvitationDetails: Codable, Hashable {
 	public init(outreach: Invitation.Outreach, fromBusiness: Business.Micro, role: TeamRole) {

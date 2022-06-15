@@ -30,8 +30,7 @@ let package = Package(
             name: "VooseyBridge",
             dependencies: [
 				.product(name: "JBSNews", package: "JBS"),
-				.product(name: "JBSAuth", package: "JBS"),
-				.product(name: "JBSModerate", package: "JBS")
+				.product(name: "JBS", package: "JBS"),
 			]),
         .testTarget(
             name: "VooseyBridgeTests",

@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import JBSModerate
-import JBSCore
+import JBS
 
 public protocol DomaMicroMetaRepresentable: Reportable, Codable, Identifiable, Hashable {
 	var meta: DomaMeta { get set }
@@ -190,7 +189,7 @@ public protocol DomaGlobalMetaRepresentable: Codable, Identifiable, Hashable {
 	var metaMap: MetaMap.Global { get set }
 }
 
-public protocol DomaCreateMetaRepresentable: Codable {
+public protocol DomaCreateMetaRepresentable: Codable, Hashable {
 	associatedtype Micro: DomaMicroMetaRepresentable
 	var micro: Micro { get set }
 	var businessID: UUID { get set }

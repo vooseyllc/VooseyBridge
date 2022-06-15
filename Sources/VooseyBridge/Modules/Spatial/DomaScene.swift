@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import JBSModerate
-import JBSCore
+import JBS
 
 public struct DomaScene {
 	public struct Micro: Reportable, Codable, Identifiable, Hashable {

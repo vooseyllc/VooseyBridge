@@ -12,7 +12,7 @@ import AppKit
 #if os(iOS)
 import UIKit
 #endif
-import JBSCore
+import JBS
 
 //TODO: Add multi camera support
 public struct TourItem: Codable, Hashable {

@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import JBSAuth
-import JBSModerate
+import JBS
 
 public struct User: Codable, Hashable {
 //	public struct RegistrationData: Codable {
@@ -34,12 +33,16 @@ public struct User: Codable, Hashable {
 //	}
 	
 	public struct Global: GlobalUserRepresentable {
-		public init(relationship: RelationshipStatus? = nil, businessTeams: [BusinessTeamMember.Global]? = nil, micro: User.Micro, savedShowcases: [KundaShowcase.Micro]? = nil, savedDomaShowcases: [DomaShowcase.Micro]? = nil) {
+		public init(relationship: RelationshipStatus? = nil, businessTeams: [BusinessTeamMember.Global]? = nil, micro: User.Micro, savedShowcases: [KundaShowcase.Micro]? = nil, projectsCount: Int, savedShowcasesCount: Int, skyboxesCount: Int, materialsCount: Int, furnitureCount: Int) {
 			self.relationship = relationship
 			self.businessTeams = businessTeams
 			self.micro = micro
 			self.savedShowcases = savedShowcases
-			self.savedDomaShowcases = savedDomaShowcases
+			self.projectsCount = projectsCount
+			self.savedShowcasesCount = savedShowcasesCount
+			self.skyboxesCount = skyboxesCount
+			self.materialsCount = materialsCount
+			self.furnitureCount = furnitureCount
 		}
 		
 		
@@ -50,7 +53,11 @@ public struct User: Codable, Hashable {
 		public var businessTeams: [BusinessTeamMember.Global]?
 		public var micro: Micro
 		public var savedShowcases: [KundaShowcase.Micro]?
-		public var savedDomaShowcases: [DomaShowcase.Micro]?
+		public var projectsCount: Int?
+		public var savedShowcasesCount: Int?
+		public var skyboxesCount: Int?
+		public var materialsCount: Int?
+		public var furnitureCount: Int?
 	}
 	
 	public struct Micro: MicroUserRepresentable, Reportable {
@@ -82,26 +89,38 @@ public struct User: Codable, Hashable {
 	}
 	
 	public struct Personal: PersonalUserRepresentable {
+		public init(messages: [Message.Global]? = nil, global: User.Global, micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, totalBytesUsed: Int? = nil, hasAcceptedTermsAndConditions: Bool, hasAcceptedPrivacyPolicy: Bool) {
+			self.messages = messages
+			self.global = global
+			self.micro = micro
+			self.email = email
+			self.token = token
+			self.businessTeams = businessTeams
+			self.totalBytesUsed = totalBytesUsed
+			self.hasAcceptedTermsAndConditions = hasAcceptedTermsAndConditions
+			self.hasAcceptedPrivacyPolicy = hasAcceptedPrivacyPolicy
+		}
+		
 		public var messages: [Message.Global]?
 		
 		public var global: User.Global
 		
 		public typealias Global = User.Global
 		
-		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, savedDomaShowcases: [DomaShowcase.Micro]? = nil, savedShowcases: [KundaShowcase.Micro]? = nil, hasAcceptedTermsAndConditions: Bool, hasAcceptedPrivacyPolicy: Bool, messages: [Message.Global]?) {
-			self.micro = micro
-			self.email = email
-			self.token = token
-			self.businessTeams = businessTeams
-			self.projects = projects
-			self.totalBytesUsed = totalBytesUsed
-//			let bt = (self.businessTeams ?? []).map({ BusinessTeamMember.Global(id: $0.id, business: $0.business, user: $0.user, role: $0.role)}), micro: self.micro})
-			let bt: [BusinessTeamMember.Global] = []
-			self.global = User.Global(relationship: nil, businessTeams: bt, micro: self.micro, savedShowcases: savedShowcases)
-			self.hasAcceptedTermsAndConditions = hasAcceptedTermsAndConditions
-			self.hasAcceptedPrivacyPolicy = hasAcceptedPrivacyPolicy
-			self.messages = messages
-		}
+//		public init(micro: User.Micro, email: String? = nil, token: String? = nil, businessTeams: [BusinessTeamMember.Personal]? = nil, projects: [Project.Global]? = nil, totalBytesUsed: Int? = nil, savedDomaShowcases: [DomaShowcase.Micro]? = nil, savedShowcases: [KundaShowcase.Micro]? = nil, hasAcceptedTermsAndConditions: Bool, hasAcceptedPrivacyPolicy: Bool, messages: [Message.Global]?) {
+//			self.micro = micro
+//			self.email = email
+//			self.token = token
+//			self.businessTeams = businessTeams
+//			self.projects = projects
+//			self.totalBytesUsed = totalBytesUsed
+////			let bt = (self.businessTeams ?? []).map({ BusinessTeamMember.Global(id: $0.id, business: $0.business, user: $0.user, role: $0.role)}), micro: self.micro})
+//			let bt: [BusinessTeamMember.Global] = []
+//			self.global = User.Global(relationship: nil, businessTeams: bt, micro: self.micro, savedShowcases: savedShowcases)
+//			self.hasAcceptedTermsAndConditions = hasAcceptedTermsAndConditions
+//			self.hasAcceptedPrivacyPolicy = hasAcceptedPrivacyPolicy
+//			self.messages = messages
+//		}
 		
 		
 		public var id: UUID? {
@@ -111,7 +130,7 @@ public struct User: Codable, Hashable {
 		public var email: String?
 		public var token: String?
 		public var businessTeams: [BusinessTeamMember.Personal]?
-		public var projects: [Project.Global]?
+//		public var projects: [Project.Global]?
 		public var totalBytesUsed: Int?
 		public var hasAcceptedTermsAndConditions: Bool
 		public var hasAcceptedPrivacyPolicy: Bool

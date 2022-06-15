@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JBSCore
+import JBS
 
 public enum SortMode: String, Codable, CircularCaseSequence {
 	case aZ

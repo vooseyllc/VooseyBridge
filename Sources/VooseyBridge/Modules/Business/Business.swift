@@ -9,18 +9,27 @@ import Foundation
 
 public struct Business {
 	public struct Global: Codable, Identifiable, Hashable {
-		public init(micro: Business.Micro) {
-			self.micro = micro
-		}
-		
-		public init(micro: Business.Micro, team: [BusinessTeamMember.Global], showcases: [KundaShowcase.Global]? = nil, domaShowcases: [DomaShowcase.Global]? = nil, products: [Product.Global]? = nil) {
+		public init(micro: Business.Micro, team: [BusinessTeamMember.Global] = [], showcases: [KundaShowcase.Global]? = nil, modelsCount: Int? = nil, scenesCount: Int? = nil, showcasesCount: Int? = nil, productsCount: Int? = nil, projectsCount: Int? = nil, teamCount: Int? = nil, clientsCount: Int? = nil, skyboxesCount: Int? = nil, materialsCount: Int? = nil, furnitureCount: Int? = nil) {
 			self.micro = micro
 			self.team = team
 			self.showcases = showcases
-			self.domaShowcases = domaShowcases
-			self.products = products
+			self.modelsCount = modelsCount
+			self.scenesCount = scenesCount
+			self.showcasesCount = showcasesCount
+			self.productsCount = productsCount
+			self.projectsCount = projectsCount
+			self.teamCount = teamCount
+			self.clientsCount = clientsCount
+			self.skyboxesCount = skyboxesCount
+			self.materialsCount = materialsCount
+			self.furnitureCount = furnitureCount
 		}
 		
+		
+		public init(micro: Business.Micro) {
+			self.micro = micro
+		}
+				
 		public var id: UUID? {
 			micro.id
 		}
@@ -30,8 +39,16 @@ public struct Business {
 		public var micro: Micro
 		public var team: [BusinessTeamMember.Global] = []
 		public var showcases: [KundaShowcase.Global]?
-		public var domaShowcases: [DomaShowcase.Global]?
-		public var products: [Product.Global]?
+		public var modelsCount: Int?
+		public var scenesCount: Int?
+		public var showcasesCount: Int?
+		public var productsCount: Int?
+		public var projectsCount: Int?
+		public var teamCount: Int?
+		public var clientsCount: Int?
+		public var skyboxesCount: Int?
+		public var materialsCount: Int?
+		public var furnitureCount: Int?
 	}
 	
 	public struct Micro: Codable, Identifiable, Hashable, RawRepresentable {
@@ -76,22 +93,12 @@ public struct Business {
 	}
 	
 	public struct Personal: Codable, Identifiable, Hashable {
-		public init(micro: Business.Micro, totalBytesUsed: Int? = nil) {
-			self.micro = micro
+		public init(team: [BusinessTeamMember.Personal] = [], totalBytesUsed: Int? = nil, global: Business.Global) {
+			self.team = team
 			self.totalBytesUsed = totalBytesUsed
+			self.global = global
 		}
 		
-		public init(micro: Business.Micro, team: [BusinessTeamMember.Personal], showcases: [KundaShowcase.Global]? = nil, domaShowcases: [DomaShowcase.Global]? = nil, projects: [Project.Global]? = nil, products: [Product.Global]? = nil, scenes: [DomaScene.Global]? = nil, models: [Doma.Micro]? = nil, totalBytesUsed: Int? = nil) {
-			self.micro = micro
-			self.team = team
-			self.showcases = showcases
-			self.domaShowcases = domaShowcases
-			self.projects = projects
-			self.products = products
-			self.scenes = scenes
-			self.models = models
-			self.totalBytesUsed = totalBytesUsed
-		}
 		
 		public static func == (lhs: Business.Personal, rhs: Business.Personal) -> Bool {
 			return lhs.micro == rhs.micro && lhs.totalBytesUsed == rhs.totalBytesUsed
@@ -99,20 +106,17 @@ public struct Business {
 		public var id: UUID? {
 			micro.id
 		}
-		public var micro: Micro
-		public var team: [BusinessTeamMember.Personal] = []
-		public var showcases: [KundaShowcase.Global]?
-		public var domaShowcases: [DomaShowcase.Global]?
-		public var projects: [Project.Global]?
-		public var products: [Product.Global]?
-		public var scenes: [DomaScene.Global]?
-		public var models: [Doma.Micro]?
-//		public var clients: [Client]
-		public var totalBytesUsed: Int?
-		
-		public var global: Business.Global {
-			return  Business.Global(micro: self.micro)
+		public var micro: Micro {
+			get {
+				global.micro
+			}
+			set {
+				global.micro = newValue
+			}
 		}
+		public var team: [BusinessTeamMember.Personal] = []
+		public var totalBytesUsed: Int?
+		public var global: Business.Global
 	}
 	
 	public struct CreateData: Codable {

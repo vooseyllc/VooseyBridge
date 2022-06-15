@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JBSCore
+import JBS
 
 public enum TeamRole: StringLiteralType, RawRepresentable, Codable, CircularCaseSequence {
 	public static let schema = "team_role_enum"

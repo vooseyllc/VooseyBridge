@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JBSModerate
+import JBS
 
 public extension ReportSchema {
 	static let showcase = ReportSchema(rawValue: "showcases")

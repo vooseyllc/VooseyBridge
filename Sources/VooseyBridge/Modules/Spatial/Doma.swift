@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JBSModerate
+import JBS
 
 public struct Doma {
 	public struct Global: Codable, Identifiable, Hashable {

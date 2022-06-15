@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JBSAuth
+import JBS
 
 public struct AuthDeviceGlobal: AuthDeviceGlobalRepresentable {
 	public init(user: User.Micro, id: UUID?, system: OperatingSystem, osVersion: String, pushToken: String?, channels: [String]) {

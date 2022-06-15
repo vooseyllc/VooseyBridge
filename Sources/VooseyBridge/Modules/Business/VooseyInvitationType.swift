@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import JBSAuth
+import JBS
 
 public extension InvitationType {
 	static var team: InvitationType {

@@ -8,16 +8,20 @@
 import Foundation
 
 public enum SearchResult: Codable, Identifiable, Equatable {
-	public var id: String? {
+	public var id: UUID? {
 		switch self {
 			case .user(let user):
-				return user.id?.uuidString
+				return user.id
 			case .business(let business):
-				return business.id?.uuidString
+				return business.id
 			case .showcase(let showcase):
-				return showcase.id?.uuidString
+				return showcase.id
 			case .tourItem(let tourItem):
-				return tourItem.id?.uuidString
+				return tourItem.id
+			case .domaShowcase(let showcase):
+				return showcase.id
+			case .project(let project):
+				return project.id
 		}
 	}
 	public init(from decoder: Decoder) throws {
@@ -37,6 +41,12 @@ public enum SearchResult: Codable, Identifiable, Equatable {
 			case .tourItem:
 				let tourItem = try container.decode(TourItem.self, forKey: .tourItem)
 				self = .tourItem(tourItem)
+			case .domaShowcase:
+				let showcase = try container.decode(DomaShowcase.Micro.self, forKey: .domaShowcase)
+				self = .domaShowcase(showcase)
+			case .project:
+				let project = try container.decode(Project.Micro.self, forKey: .project)
+				self = .project(project)
 			default:
 				throw DecodingError.dataCorrupted(
 					DecodingError.Context(
@@ -58,6 +68,10 @@ public enum SearchResult: Codable, Identifiable, Equatable {
 				try container.encode(showcase, forKey: .showcase)
 			case .tourItem(let tourItem):
 				try container.encode(tourItem, forKey: .tourItem)
+			case .domaShowcase(let showcase):
+				try container.encode(showcase, forKey: .domaShowcase)
+			case .project(let project):
+				try container.encode(project, forKey: .project)
 		}
 	}
 	
@@ -66,10 +80,14 @@ public enum SearchResult: Codable, Identifiable, Equatable {
 		case business
 		case showcase
 		case tourItem
+		case domaShowcase
+		case project
 	}
 	
 	case user(User.Micro)
 	case business(Business.Micro)
 	case showcase(KundaShowcase.Micro)
 	case tourItem(TourItem)
+	case domaShowcase(DomaShowcase.Micro)
+	case project(Project.Micro)
 }

@@ -38,7 +38,7 @@ public struct DomaScene {
 	}
 	
 	public struct Global: Reportable, Codable, Identifiable, Hashable {
-		public init(micro: DomaScene.Micro, tour: [TourItem], model: Doma.Micro, showcase: DomaShowcase.Micro? = nil, project: Project.Micro? = nil, product: Product.Micro? = nil, materialOverrides: MaterialOverrides) {
+		public init(micro: DomaScene.Micro, tour: [TourItem], model: Doma.Micro, showcase: DomaShowcase.Micro? = nil, project: Project.Micro? = nil, product: Product.Micro? = nil, materialOverrides: MaterialOverrides? = nil) {
 			self.micro = micro
 			self.tour = tour
 			self.model = model
